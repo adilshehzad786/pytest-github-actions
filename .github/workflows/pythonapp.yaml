@@ -1,0 +1,23 @@
+name: Run Python Tests
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.8.5
+    steps:
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+      - name : Cloning GitHub Code
+        run: |
+          git clone https://www.github.com/adilshehzad786/pytest-github-actions.git
+          cd pytest-github-actions
+          pytest test_capitalize.py
